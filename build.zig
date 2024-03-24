@@ -10,11 +10,14 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
     lib.linkLibC();
-    lib.addCSourceFiles(&.{"fpconv_dtoa.c"}, &.{
-        "-std=c99",
-        "-Wall",
-        "-Os",
-        "-g",
+    lib.addCSourceFiles(.{
+        .files = &.{"fpconv_dtoa.c"},
+        .flags = &.{
+            "-std=c99",
+            "-Wall",
+            "-Os",
+            "-g",
+        },
     });
 
     lib.installHeader("fpconv_dtoa.h", "fpconv_dtoa.h");
